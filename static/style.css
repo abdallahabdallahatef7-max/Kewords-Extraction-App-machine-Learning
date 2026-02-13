@@ -1,0 +1,115 @@
+/* --- Core Variables & Setup --- */
+:root {
+    --bg-deep: #0b0f1a;
+    --accent-primary: #6366f1;
+    --accent-secondary: #ec4899;
+    --text-main: #f1f5f9;
+    --glass-fill: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --neon-glow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+* {
+    box-sizing: border-box;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    background-color: var(--bg-deep);
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 40%);
+    color: var(--text-main);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* --- Glassmorphism Logic --- */
+.glass-panel {
+    background: var(--glass-fill);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2rem;
+}
+
+.glass-panel:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-4px);
+}
+
+/* --- Typography & Gradients --- */
+.text-gradient {
+    background: linear-gradient(to right, #818cf8, #c084fc, #fb7185);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+}
+
+/* --- Form Elements --- */
+.input-neon {
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    color: white;
+    padding: 1rem 1.25rem;
+    width: 100%;
+    outline: none;
+}
+
+.input-neon:focus {
+    border-color: var(--accent-primary);
+    box-shadow: var(--neon-glow);
+}
+
+.btn-fire {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    border: none;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-fire:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 0 25px rgba(236, 72, 153, 0.4);
+    transform: scale(1.02);
+}
+
+/* --- Keyword Chips --- */
+.keyword-tag {
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 100px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    margin: 0.25rem;
+    animation: slideIn 0.5s ease-out backwards;
+}
+
+.score-pill {
+    background: var(--accent-primary);
+    border-radius: 6px;
+    font-size: 0.7rem;
+    margin-left: 8px;
+    padding: 2px 6px;
+}
+
+/* --- Animations --- */
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }

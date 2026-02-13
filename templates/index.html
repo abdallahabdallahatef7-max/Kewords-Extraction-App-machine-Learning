@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Keyword Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: radial-gradient(circle at top left, #1a1a2e, #16213e); min-height: 100vh; color: white; }
+        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .neon-text { text-shadow: 0 0 10px rgba(168, 85, 247, 0.5); }
+    </style>
+</head>
+<body class="p-6">
+    <div class="max-w-5xl mx-auto">
+        <header class="text-center mb-12">
+            <h1 class="text-6xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 neon-text">
+                Keyword Intelligence
+            </h1>
+            <p class="text-gray-400">Advanced NLP Keyword Extraction & Model Search</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div class="glass p-8 rounded-3xl shadow-2xl">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">🚀 Extract Keywords</h2>
+                <form action="/extract_keywords" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" required class="block w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-700 transition-all cursor-pointer"/>
+                    <button type="submit" class="mt-6 w-full bg-gradient-to-r from-purple-600 to-indigo-600 p-3 rounded-xl font-bold hover:opacity-90 transition-all shadow-lg shadow-purple-500/20">Analyze Document</button>
+                </form>
+            </div>
+
+            <div class="glass p-8 rounded-3xl shadow-2xl">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">🔍 Search Model</h2>
+                <form action="/search_keywords" method="post">
+                    <input type="text" name="search" placeholder="Type a concept..." required class="w-full bg-gray-900/50 border border-gray-700 rounded-xl p-3 focus:ring-2 focus:ring-pink-500 outline-none transition-all">
+                    <button type="submit" class="mt-6 w-full bg-gradient-to-r from-pink-600 to-red-600 p-3 rounded-xl font-bold hover:opacity-90 transition-all shadow-lg shadow-pink-500/20">Search Vocabulary</button>
+                </form>
+            </div>
+        </div>
+
+        {% if keywords or search_results %}
+        <div class="glass p-8 rounded-3xl shadow-2xl animate-fade-in">
+            {% if keywords %}
+                <h3 class="text-2xl font-bold mb-6 text-purple-400">Top Extracted Keywords</h3>
+                <div class="flex flex-wrap gap-3">
+                    {% for word, score in keywords.items() %}
+                    <div class="bg-white/5 border border-white/10 px-4 py-2 rounded-full flex items-center gap-3 hover:bg-white/10 transition-all">
+                        <span class="font-medium">{{ word }}</span>
+                        <span class="text-xs bg-purple-600 px-2 py-0.5 rounded-md">{{ score }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if search_results %}
+                <h3 class="text-2xl font-bold mb-6 text-pink-400">Model Vocabulary Results for "{{ query }}"</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    {% for word in search_results %}
+                    <div class="bg-white/5 p-3 rounded-xl text-center border border-white/10 hover:border-pink-500/50 transition-all">
+                        {{ word }}
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
